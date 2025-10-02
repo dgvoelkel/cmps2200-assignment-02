@@ -1,6 +1,6 @@
 # CMPS 2200 Assignment 2
 
-**Name:**_________________________
+**Name:**Davis Voelkel
 
 In this assignment we'll work on applying the methods we've learned to analyze recurrences, and also see their behavior
 in practice. As with previous
@@ -15,7 +15,8 @@ and push to your github repository.
 Derive asymptotic upper bounds of work for each recurrence below.
 
 * $W(n)=2W(n/3)+1$
-.  
+* = $\sum 2^k$ , from k=0 to k= log3 n
+* = $2^{log_3 2} -1 \in O(n^{log_3 2})$
 .  
 . 
 .  
@@ -24,6 +25,9 @@ Derive asymptotic upper bounds of work for each recurrence below.
 . 
  
 * $W(n)=5W(n/4)+n$
+* = $\sum (5/4)^k$ , from k =0 to k= log4 n
+* Since, $n^{log_4 5}$ dominates n, by Master's Theorem Case 1,
+* $W(n) \in O(n^{log_4 5})$
 .  
 .
 .  
@@ -35,6 +39,8 @@ Derive asymptotic upper bounds of work for each recurrence below.
 . 
 
 * $W(n)=7W(n/7)+n$
+* Balanced like W(n) = 2W(n/2) + n, therefore
+* $W(n)=7W(n/7)+n \in O(nlogn)$
 .  
 . 
 .  
@@ -44,6 +50,9 @@ Derive asymptotic upper bounds of work for each recurrence below.
 .
 
 * $W(n)=9W(n/3)+n^2$
+* = $\sum n* 9^{k}$ , from k =0 to k=log3 n.
+* Since $n^{log_3 9}$ = $f(x)$ = $n^2$ , by Master's Theorem Case 2,
+* = $n^2 * log n \in O(n^2  logn)$
 .  
 .
 . 
@@ -55,6 +64,8 @@ Derive asymptotic upper bounds of work for each recurrence below.
 .
 
 * $W(n)=8W(n/2)+n^3$
+* Since $n^{log_2 8}$ = f(x)= $n^3$ , by Master's Theorem Case 2,
+* = $n^3 * log n \in O(n^3 logn)$
 .  
 .
 .  
@@ -67,6 +78,8 @@ Derive asymptotic upper bounds of work for each recurrence below.
 
 
 * $W(n)=49W(n/25)+n^{3/2}\log n$
+* Since $n^{log_25 49}$ is less than $n^{3/2} logn$ , by the Master's Theorem Case 3,
+* $W(n) \in O(n^{3/2} logn)$ 
 .  
 .  
 . 
@@ -77,6 +90,7 @@ Derive asymptotic upper bounds of work for each recurrence below.
 .  
 
 * $W(n)=W(n-1)+2$
+* = $2n \in O(n)$
 .  
 .  
 . 
@@ -87,6 +101,7 @@ Derive asymptotic upper bounds of work for each recurrence below.
 .  
 
 * $W(n)= W(n-1)+n^c$, with $c\geq 1$
+* = $n * n^c \in O(n^{c+1})$
 .  
 .  
 .  
@@ -97,6 +112,11 @@ Derive asymptotic upper bounds of work for each recurrence below.
 . 
 
 * $W(n)=W(\sqrt{n})+1$
+* $n^{1/2^k} < 2$
+* = $ln(n) /2^k$ < ln(2)$
+* $2^k > ln(n)/ln(2) = log_2 n$
+* $k > log_2(log_2 n)$, therefore
+* $W(n) \in O(log(log n))$
 .  
 .  
 .  
@@ -125,6 +145,8 @@ Suppose that for a given task you are choosing between the following three algor
 
     What are the asymptotic running times of each of these algorithms?
     Which algorithm would you choose?
+
+    Algorithm A is O(n^log_2 5) by the first case of Master's Theorem. Algorithm B is O(2^n) since W(n) = 2W(n-1) +1. The work is 2^k, where k =n since the recursion is iterative. Algorithm C is O(n^2 logn) as shown above. I would choose Algorithm C since log_2 5 is greater than 2, therefore making n^log_2 5 greater than n^2.
 
 
 .  
@@ -158,9 +180,10 @@ Below, we'll solve this problem three different ways, using iterate, scan, and d
 
 
 
-**3b.** What are the recurrences for the Work and Span of this solution? What are their Big Oh solutions?
+**3b.** What are the recurrences for the Work and Span of this solution? What are their Big Oh solutions?  
+* W(n) = W(n+1) +1 which is O(n). The span is the exact same since this is a sequential algorithm, making it O(n) as well.
 
-**enter answer here**
+
 
 .  
 . 
@@ -176,7 +199,18 @@ Below, we'll solve this problem three different ways, using iterate, scan, and d
 
 **3d.** Assume that any `map`s are done in parallel, and that we use the efficient implementation of `scan` from class. What are the recurrences for the Work and Span of this solution? 
 
-**enter answer here**
+* Map:
+    - $W(n) = O(n)$
+    - $S(n) = O(1)$
+* Scan:
+    - $W(n) = O(n)$
+    - $S(n) = O(logn)$
+* Reduce:
+    - W(n) = O(n)
+    - S(n) = O(logn)
+* Total:
+    - W(n) = O(n)
+    - S(n) = O(logn)
 
 .  
 .  
@@ -197,11 +231,8 @@ Below, we'll solve this problem three different ways, using iterate, scan, and d
 
 **3f.** Assuming any recursive calls are done in parallel, what are the recurrences for the Work and Span of this solution? What are their Big Oh solutions?
 
-**enter answer here**
-
-.  
-. 
-
+* W(n) = 2W(n/2)+1 = O(n)
+* S(n) = W(n/2) +1 = O(logn)
 
  
  
